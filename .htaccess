@@ -1,0 +1,11 @@
+# Enable rewrite
+RewriteEngine On
+
+# It will not redirect us if it is an exisitng: d: Directory, f: file, l: link
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# This will take any url-request and direct it to "index.php".
+# "?url=$1" provides $_GET['url']
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

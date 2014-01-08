@@ -1,0 +1,23 @@
+<<<<<<< HEAD
+.DS_Store
+Guardfile
+=======
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+>>>>>>> 4f48d5c34ca61aaa47e6a87af39fda2b360651e5
