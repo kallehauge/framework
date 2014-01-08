@@ -27,8 +27,10 @@ class Index extends Controller {
 		$this->view->display('index', $data);
 	}
 
-	public function test($test = null) {
-		echo "<br>Route: Index/test<br>";
+	public function test($test = null, $test2 = null, $test3 = null) {
+		echo "Route: Index/test<br>";
 		echo "Argument: ". $test;
+		echo "<br>". $test2;
+		echo "<br>". $test3;
 	}
 }
