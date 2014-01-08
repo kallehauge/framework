@@ -76,15 +76,31 @@ class Router {
 	 *	as the default controller ('controllers/index.php');
 	 */
 	protected function default_controller($url, $router) {
-		// URL
+		// If there are no URI
 		if( empty($url[0]) ) {
+			// Trim slashes from default controller
+			$router['default_controller'] = trim($router['default_controller'], '/');
+			// Explode default controller
+			$router = explode('/', $router['default_controller']);
 			// Require the default controller file
-			require CON_PATH . $router['default_controller'] . '.php';
-			// Instantiate 'controllers/index'
-			$controller = new $router['default_controller']();
-			// Enter default/index
-			$controller->index();
-			// Return false so the rest of the code below doesn't execute.
+			require CON_PATH . $router[0] . '.php';
+
+			// If a function have been provided
+			if( isset($router[1]) ) {
+				// Instantiate default controller
+				$controller = new $router[0]();
+				// And enter provided function
+				$controller->$router[1]();
+			}
+			// If only the controller have been provided
+			else {
+				// Instantiate 'controllers/index'
+				$controller = new $router[0]();
+				// Enter default/index
+				$controller->index();
+			}
+
+			// Return false to kill the rest of the script
 			return false;
 		}
 	}
