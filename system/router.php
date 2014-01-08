@@ -38,7 +38,7 @@ class Router {
 			$router = $this->explode_router($router);
 			// Get routed controller
 			$route = $this->route_controller($url, $router);
-			var_dump($route);
+			//var_dump($route);
 			// If the result is false, get 404 page
 			if( $this->call_controller($route) === False ) {
 				// require 404 page.
@@ -53,7 +53,8 @@ class Router {
 	 * ------------------------------------------------------
 	 *	Process the URL and divide it up to:
 	 *		1. controller name
-	 *		2. arguments passed to the controller
+	 *		2. possible function name
+	 *		2. possible arguments
 	 */
 	protected function explode_url() {
 		// Check if the URL is set; else make it null / empty
@@ -76,7 +77,7 @@ class Router {
 	 *	as the default controller ('controllers/index.php');
 	 */
 	protected function default_controller($url, $router) {
-		// If there are no URI
+		// If there are no URN
 		if( empty($url[0]) ) {
 			// Trim slashes from default controller
 			$router['default_controller'] = trim($router['default_controller'], '/');
@@ -105,6 +106,15 @@ class Router {
 		}
 	}
 
+	/**
+	 * ------------------------------------------------------
+	 *	Explode Router (convert from string)
+	 * ------------------------------------------------------
+	 *	Process the Router and divide it up to equivalent:
+	 *		1. controller name
+	 *		2. possible function name
+	 *		2. possible arguments
+	 */
 	protected function explode_router($router) {
 
 		$i = 0;
@@ -216,64 +226,147 @@ class Router {
 		}
 	}
 
-	// Get route of the wanted controller
+	/** 
+	 * ----------------------------------------
+	 * Convert URL to desired Route
+	 * ----------------------------------------
+	 */
 	protected function route_controller($url, $router) {
-		
-		/** 
-		 * ----------------------------------------
-		 * Compare route name & URL
-		 * ----------------------------------------
-		 */
-
 		// Count amount of rows in the url-array
 		$url_count = count($url);
 
 		// Loop through each route
 		foreach ($router as $key => $route) {
-			
+			// Shorthand variables
+			$name = $route['name'];
+			$values = $route['value'];
+			$value_count = count( $values );
+			$value_index = $value_count - 1;
+
 			// Count amount of rows in the route's name
-			$route_count = count($route['name']);
+			$route_count = count($name);
 
 			// If there is only 1 row in both arrays
 			if( $url_count === $route_count && $url_count === 1) {
 				// If the names are identical
-				if( $url[0] === $route['name'] ) {
-					return $route['value'];
+				if( $url[0] === $name ) {
+					return $values;
 				} else {
 					return False;
 				}
 			}
 			// If the amount of rows in Route and URL is the same (is_array to ignore "default_controller" or possible strings)
-			elseif( is_array($route['name']) && $url_count === $route_count ) {
+			elseif( is_array($name) && $url_count === $route_count ) {
 				// Compare arrays and find the difference
-				$diff = array_diff($url, $route['name']);
+				$diff = array_diff($url, $name);
 				// Count amount of differences
 				$diff_count = count($diff);
 
 				// If the two arrays are identical
 				if ( $diff_count === 0 ) {
 					// Instantiate controller (and exit the rest of the script)
-					return $route['value'];
+					return $values;
 				}
 
-/* Problem from Here */
-				// Define valid
-				$valid = True;
-				// Go through each difference
-				foreach ($diff as $value) {
-					// If the difference doesn't equal "*"
-					if( $value !== '*' ) {
-						// Make $valid, false.
-						$valid = False;
+				// "Key" and 4x random
+				if( $route_count === 5 ) {
+					// Compare all URL values to the route or *
+					if( $url[0] === $name[0] AND
+						$url[1] === $name[1] OR $name[1] === '*' AND 
+						$url[2] === $name[2] OR $name[2] === '*' AND
+						$url[3] === $name[3] OR $name[3] === '*' AND
+						$url[4] === $name[4] OR $name[4] === '*' )
+					{
+						// Find the difference(s) from the url and the route-name
+						$diff = array_diff($url, $name);
+						// Reset array-keys
+						$diff = array_values($diff);
+
+						// For each value in the route (based on count)
+						for ($i = 0; $i < $value_count; $i++) { 
+							// If the value equals '*'
+							if( $values[$i] === '*' ) {
+								// Change value from * to first row in $dif (array)
+								$values[$i] = $diff[0];
+								// Remove assigned row from array
+								unset($diff[0]);
+								// Re-order keys (so it will be diff[0] next time too)
+								$diff = array_values($diff);
+							}
+						}
+						// Return the changed route
+						return $values;
 					}
 				}
 
-				// If valid were a success, instantiate controller
-				if($valid === True) {
+				// "Key" and 3x random
+				elseif( $route_count === 4 ) {					
+					// Compare all URL values to the route or *
+					if( $url[0] === $name[0] AND
+						$url[1] === $name[1] OR $name[1] === '*' AND 
+						$url[2] === $name[2] OR $name[2] === '*' AND
+						$url[3] === $name[3] OR $name[3] === '*' )
+					{
+						// Find the difference(s) from the url and the route-name
+						$diff = array_diff($url, $name);
+						// Reset array-keys
+						$diff = array_values($diff);
 
-					var_dump( $route['value'] );
+						// For each value in the route (based on count)
+						for ($i = 0; $i < $value_count; $i++) { 
+							// If the value equals '*'
+							if( $values[$i] === '*' ) {
+								// Change value from * to first row in $dif (array)
+								$values[$i] = $diff[0];
+								// Remove assigned row from array
+								unset($diff[0]);
+								// Re-order keys (so it will be diff[0] next time too)
+								$diff = array_values($diff);
+							}
+						}
+						// Return the changed route
+						return $values;
+					}
+				}
 
-					//return $route['value'];
+				// "Key" and 2x random
+				elseif( $route_count === 3 ) {
+					// Compare all URL values to the route or *
+					if( $url[0] === $name[0] AND
+						$url[1] === $name[1] OR $name[1] === '*' AND 
+						$url[2] === $name[2] OR $name[2] === '*' )
+					{
+						// Find the difference(s) from the url and the route-name
+						$diff = array_diff($url, $name);
+						// Reset array-keys
+						$diff = array_values($diff);
+
+						// For each value in the route (based on count)
+						for ($i = 0; $i < $value_count; $i++) { 
+							// If the value equals '*'
+							if( $values[$i] === '*' ) {
+								// Change value from * to first row in $dif (array)
+								$values[$i] = $diff[0];
+								// Remove assigned row from array
+								unset($diff[0]);
+								// Re-order keys (so it will be diff[0] next time too)
+								$diff = array_values($diff);
+							}
+						}
+						// Return the changed route
+						return $values;
+					}
+				}
+
+				// "Key" and 1x random
+				elseif( $route_count === 2 ) {
+					// If the first values match
+					if( $url[0] === $name[0] ) {
+						// replace last value as variable
+						$values[$value_index] = $url[1];
+						// return changed value-array
+						return $values;
+					}
 				}
 			}
 		}
