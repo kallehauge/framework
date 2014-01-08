@@ -15,9 +15,7 @@ class Index_Model extends Model {
 	}
 
 	function test() {
-		// return "Index Model Virker";
-		
-		$query = $this->db->query("SELECT * FROM users");
-		var_dump( $query->fetchObject() );
+		// Return some ipsum data
+		return 1337;
 	}
 }

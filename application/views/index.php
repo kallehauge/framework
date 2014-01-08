@@ -1,5 +1,1 @@
-<?php 
-
-	echo "<br> $test <br>";
-
-?>
+<p> This is some default data: <?= $default; ?>. </p>

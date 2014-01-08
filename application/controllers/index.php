@@ -17,17 +17,18 @@ class Index extends Controller {
 
 	// The index function will work as default for the constructor.
 	public function index() {
-		// Load
-		$index = $this->load->model('index_model');
+		// Load model
+		$model = $this->load->model('index_model');
 
-		// Data
-		$data['test'] = $index->test();
-		// View
+		// Get data from model
+		$data['default'] = $model->test();
+
+		// View page & pass data
 		$this->view->display('index', $data);
 	}
 
 	public function test($test = null) {
-		echo "Yup, it's a test! about stuff! <br>";
-		echo $test;
+		echo "Route: Index/test<br>";
+		echo "Argument: ". $test;
 	}
 }
