@@ -38,7 +38,7 @@ class Router {
 			$router = $this->explode_router($router);
 			// Get routed controller
 			$route = $this->route_controller($url, $router);
-
+			var_dump($route);
 			// If the result is false, get 404 page
 			if( $this->call_controller($route) === False ) {
 				// require 404 page.
@@ -151,10 +151,6 @@ class Router {
 	 *	This is based on the first value of the array ($array[0])
 	 */
 	protected function call_controller($url) {
-
-		/* IF STATEMENT!*/
-		/* If the URL == *, do some fancy trick to replace it. REPLACE IS THE KEY! */
-
 		// Define path to the controller
 		$file = CON_PATH . $url[0] .'.php';
 		// If the controller-file exists:
@@ -222,11 +218,19 @@ class Router {
 
 	// Get route of the wanted controller
 	protected function route_controller($url, $router) {
+		
+		/** 
+		 * ----------------------------------------
+		 * Compare route name & URL
+		 * ----------------------------------------
+		 */
+
 		// Count amount of rows in the url-array
 		$url_count = count($url);
 
 		// Loop through each route
 		foreach ($router as $key => $route) {
+			
 			// Count amount of rows in the route's name
 			$route_count = count($route['name']);
 
@@ -239,9 +243,8 @@ class Router {
 					return False;
 				}
 			}
-			// If there is more than 1 row in both arrays
-			elseif( $url_count === $route_count ) {
-
+			// If the amount of rows in Route and URL is the same (is_array to ignore "default_controller" or possible strings)
+			elseif( is_array($route['name']) && $url_count === $route_count ) {
 				// Compare arrays and find the difference
 				$diff = array_diff($url, $route['name']);
 				// Count amount of differences
@@ -253,6 +256,7 @@ class Router {
 					return $route['value'];
 				}
 
+/* Problem from Here */
 				// Define valid
 				$valid = True;
 				// Go through each difference
@@ -266,7 +270,10 @@ class Router {
 
 				// If valid were a success, instantiate controller
 				if($valid === True) {
-					return $route['value'];
+
+					var_dump( $route['value'] );
+
+					//return $route['value'];
 				}
 			}
 		}

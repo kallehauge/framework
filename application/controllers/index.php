@@ -28,7 +28,7 @@ class Index extends Controller {
 	}
 
 	public function test($test = null) {
-		echo "Route: Index/test<br>";
+		echo "<br>Route: Index/test<br>";
 		echo "Argument: ". $test;
 	}
 }
