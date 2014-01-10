@@ -8,9 +8,9 @@ Capabilities
 ---
 _The framework is primarily made to get the advantages of a MVC structure and not as a tool for faster development within a MVC enviroment. Future plans will include more helpers and a library function._
 * MVC structure.
-* Choose between PDO or MySQLi connection.
-* A basic router that can handle up to 5 arguments per route.
-* A few URL helpers are already implemented.
+* Choose between PDO or MySQLi.
+* A basic router which handles up to 5 arguments per route.
+* URL helpers.
 
 Installation
 ---
