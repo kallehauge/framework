@@ -1,7 +1,7 @@
 <?php
 /**
  * ------------------------------------------------------
- *	URL processing && Initialize Controller-handler
+ *	URL processing && Bootstrapping the framework
  * ------------------------------------------------------
  *	Purpose:
  *		Works as the bootstrap of the framework by instanciating
