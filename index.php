@@ -49,6 +49,15 @@
 
 /**
  * ------------------------------------------------------
+ *	Require base functions
+ * ------------------------------------------------------
+ *	Get base functions like "base_url()" & "redirect()".
+ *	This will get replaced later on by a helper/loader
+ */
+	require_once SYS_PATH . 'functions.php';
+
+/**
+ * ------------------------------------------------------
  *	Instantiate the MVC kernel
  * ------------------------------------------------------
  *
