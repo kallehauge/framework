@@ -1,7 +1,2 @@
 .DS_Store
 Guardfile
-*.gem
-*.rbc
-.bundle
-.config
-pkg
