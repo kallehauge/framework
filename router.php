@@ -12,13 +12,13 @@
  *	Dependencies:
  *		./system/...
  */
-	
+	/* Testing purpose */
 	$router['test'] = "index/test";
 	$router['test/*'] = "index/test/*";
 	$router['test/*/*'] = "index/test/*/*/";
 	$router['test/*/*/*'] = "index/test/*/*/*";
-	/* Testing purpose */
 	$router['stuff/stuff'] = "index/stuff2";
 	$router['stuff2/stuff2'] = "index/stuff2";
+	
 	/* Default */
 	$router['default_controller'] = "index";

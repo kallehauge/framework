@@ -10,7 +10,7 @@
  *		This file is instantiated in "./system/kernel.php".
  *
  *	Dependencies:
- *		./router.php (required inside class constructor)
+ *		./router.php (required inside constructor)
  */
 
 // The Router
