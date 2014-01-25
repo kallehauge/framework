@@ -12,13 +12,11 @@
  *
  *	Dependencies:
  *		Array:	./routes.php (injected from "./index.php")
- *		File:	./system/router.php (outdated)
  *		File:	./system/controller.php
  *		File:	./system/model.php
  */
 
-// Require dependencies
-require_once SYS_PATH . 'router.php';
+// Require dependency files
 require_once SYS_PATH . 'controller.php';
 require_once SYS_PATH . 'model.php';
 
