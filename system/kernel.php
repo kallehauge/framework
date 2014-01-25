@@ -11,10 +11,10 @@
  *		This file is instantiated in "./index.php".
  *
  *	Dependencies:
- *		./router.php (required inside constructor)
- *		./system/router.php
- *		./system/controller.php
- *		./system/model.php
+ *		Array:	./routes.php (injected from "./index.php")
+ *		File:	./system/router.php (outdated)
+ *		File:	./system/controller.php
+ *		File:	./system/model.php
  */
 
 // Require dependencies
@@ -26,10 +26,7 @@ require_once SYS_PATH . 'model.php';
 class Kernel {
 
 	// Constructor
-	public function __construct() {
-
-		// Get router-array
-		require_once ROOT . 'router.php';
+	public function __construct( Array $router ) {
 
 		// Get URL as array.
 		$url = $this->explode_url();

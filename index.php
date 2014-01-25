@@ -46,7 +46,7 @@
  *	Get constants like "DB information" and "VIEW_PATH"
  */
 	require_once SYS_PATH . 'constants.php';
-
+	
 /**
  * ------------------------------------------------------
  *	Require base functions
@@ -66,10 +66,13 @@
  *		the controllers in the 'controllers' folder.
  *
  *	Dependencies:
- *		File: './system/kernel.php' is required.
+ *		File: './system/kernel.php'
+ *		Array: './routes.php'
  */
+	// Require routes
+	require_once ROOT . 'routes.php';
 	// Require Kernel.php
 	require_once SYS_PATH . 'kernel.php';
 	// Instantiate kernel
-	$kernel = new kernel();
+	$kernel = new kernel($router);
 /* End of file 'index.php' */
