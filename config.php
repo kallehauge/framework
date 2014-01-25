@@ -3,15 +3,15 @@
  * ---------------------------------------------------------------
  * 	Config file
  * ---------------------------------------------------------------
+ *	Purpose:
+ *		Set user-configurations for the core.
  */
 	$config['db']['host'] = '127.0.0.1';
 	$config['db']['user'] = 'root';
 	$config['db']['pass'] = '';
 	$config['db']['name'] = 'framework';
 	$config['db']['charset'] = 'utf8';
-	/* If PDO = true, it will be the driver for a PDO connectin.
-	   If PDO is set to "FALSE", the Driver will fallback to MySQLi. */
-	$config['db']['PDO'] = True;
-	$config['db']['driver'] = 'mysql';
+	$config['db']['PDO'] = True; // PDO = False -> will fallback to a mysqli connection
+	$config['db']['driver'] = 'mysql'; // The PDO driver (requires PDO = True)
 
-/* End of file "./system/config.php" */
+/* End of file "./config.php" */
