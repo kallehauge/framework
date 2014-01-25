@@ -12,9 +12,9 @@
  *		if any of these functionalities should be available.
  *
  *	Dependencies:
- *		parent::__construct(); by user-created controllers
- *		./system/view.php
- *		./system/loader.php
+ *		Inheritance: parent::__construct();
+ *		File:	./system/view.php
+ *		File:	./system/loader.php
  */
 
 // Require dependencies
