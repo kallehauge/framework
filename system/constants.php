@@ -13,9 +13,9 @@
  *		./config.php
  *
  *	Warning:
- *		Do not change the names of the constants. They are being used
+ *		Do not change the names of these constants. They are being used
  *		in other files, and any change will most likely "corrupt"
- *		libraries and core files.
+ *		libraries and core files (Don't Hack Core!).
  */
 
 /**
@@ -38,10 +38,9 @@
 	// Database Driver
 	define('DB_DRIVER', $config['db']['driver']);
 
-
 /**
  * ---------------------------------------------------------------
- * 	Define the BASE_URL path
+ * 	Define BASE_URL path
  * ----------------------------------------------------------------
  *
  *	The following code removes "index.php?" from the original URL,
@@ -57,21 +56,21 @@
 	// Define the BASEPATH + adds a '/'.
 	define('BASE_URL', $base_url.'/');
 
-
 /**
  * ---------------------------------------------------------------
  * 	Define directory paths
  * ---------------------------------------------------------------
  *
- * 	DO NOT CHANGE THE DEFINED NAMES! If you want to edit paths,
- *	please go to "./config.php" and change it there.
+ *	Please, do not touch these constants. Changing the names or
+ *	paths of these directories might destroy the software.
  */
+
 	// Views
-	defineDirectoryPath('VIEW_PATH', $views_directory);
+	defineDirectoryPath('VIEW_PATH', 'application/views');
 	// Models
-	defineDirectoryPath('MODEL_PATH', $models_directory);
+	defineDirectoryPath('MODEL_PATH', 'application/models');
 	// Controllers
-	defineDirectoryPath('CON_PATH', $controllers_directory);
+	defineDirectoryPath('CON_PATH', 'application/controllers');
 
 	// Define function
 	function defineDirectoryPath($name, $directory) {
@@ -80,16 +79,17 @@
 		// If the directory exists => execute
 		if (is_dir($directory)) {
 			// Define the directory
-			define($name, $directory.'/');
+			define($name, $directory .'/');
 		}
+		// Else if the directory couldn't be foind -> try to include ROOT
 		else {
-			// If the directory doesn't exists (included the BASE_URL)
-			if ( ! is_dir(ROOT . $directory.'/')) {
+			// Check if the directory exists
+			if ( ! is_dir(ROOT . $directory .'/') ) {
 				// Error message
 				exit('Your '. $name .' doesn\'t appear to be set correctly.');
 			}
-			// Define directory with BASE_URL
-			define($name, ROOT . $directory.'/');
+			// Define directory with ROOT
+			define($name, ROOT . $directory .'/');
 		}
 	}
 
